@@ -26,7 +26,14 @@
     <Application Id="App"
         Executable="$targetnametoken$.exe"
         EntryPoint="GeekBrains.VKPlayer.App">
-        <m3:VisualElements
+
+      <Extensions>
+        <Extension Category="windows.protocol">
+          <Protocol Name="vk5116069" m2:DesiredView="useLess"/>
+        </Extension>
+      </Extensions>
+
+      <m3:VisualElements
             DisplayName="GeekBrains.VKPlayer"
             Square150x150Logo="Assets\Logo.png"
             Square44x44Logo="Assets\SmallLogo.png"
