@@ -33,7 +33,16 @@
             Background="Transparent"
             Foreground="White" 
             SelectionMode="Extended" 
-            Margin="5,0"/>
+            Margin="5,0">
+        </ListBox>
+
+        <Button 
+            x:Name="button" 
+            Content="Button"
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalAlignment="Stretch"
+            Tapped="button_Tapped"/>
 
         <MediaElement 
             x:Name="player" 
