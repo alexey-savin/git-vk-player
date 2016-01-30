@@ -27,16 +27,24 @@ namespace GeekBrains.VKPlayer
             VKSDK.Authorize(_scopeList, false, false);
         }
 
-        private void button_Tapped(object sender, TappedRoutedEventArgs e)
+        private string GetTrackUrl(string vkTrackUrl)
         {
-            trackView.Items.Clear();
+            return vkTrackUrl.Substring(0, vkTrackUrl.IndexOf('?'));
+        }
+
+        private void TextBlock_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            string tag = (sender as TextBlock).Tag.ToString();
+            player.Source = new Uri(GetTrackUrl(tag));
+            player.Play();
+        }
+
+        private void trackRequest_TextChanged(object sender, TextChangedEventArgs e)
+        {
             var requestPar = new VKRequestParameters("audio.search", "q", trackRequest.Text);
-            Action<VKBackendResult<VKList<VKAudio>>> callback = (result) => 
+            Action<VKBackendResult<VKList<VKAudio>>> callback = (result) =>
             {
-                foreach (var track in result.Data.items)
-                {
-                    trackView.Items.Add($"{track.artist} - {track.title}");
-                }
+                trackView.ItemsSource = result?.Data?.items; // оператор безопасной навигации
             };
 
             VKRequest.Dispatch<VKList<VKAudio>>(requestPar, callback);

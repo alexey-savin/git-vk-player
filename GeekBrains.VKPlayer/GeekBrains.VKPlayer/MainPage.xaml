@@ -34,15 +34,17 @@
             Foreground="White" 
             SelectionMode="Extended" 
             Margin="5,0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Tag="{Binding url}"
+                               Tapped="TextBlock_Tapped">
+                        <Run Text="{Binding artist}"/>
+                        <Run Text=" - "/>
+                        <Run Text="{Binding title}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
-
-        <Button 
-            x:Name="button" 
-            Content="Button"
-            Grid.Row="1"
-            Grid.Column="1"
-            HorizontalAlignment="Stretch"
-            Tapped="button_Tapped"/>
 
         <MediaElement 
             x:Name="player" 
@@ -57,7 +59,9 @@
             Grid.ColumnSpan="3" 
             TextWrapping="Wrap" 
             Text="" 
-            VerticalAlignment="Top" Height="39"/>
+            VerticalAlignment="Top" 
+            Height="39"
+            TextChanged="trackRequest_TextChanged"/>
         
         <ProgressBar 
             x:Name="playerProgress" 
