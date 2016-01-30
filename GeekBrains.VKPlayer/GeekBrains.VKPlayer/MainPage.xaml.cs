@@ -20,8 +20,7 @@ namespace GeekBrains.VKPlayer
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
             VKSDK.Initialize("5116069");
-            VKSDK.WakeUpSession();
-            //VKSDK.Authorize(_scopeList, false, false);
+            VKSDK.Authorize(_scopeList, false, false);
         }
     }
 }
