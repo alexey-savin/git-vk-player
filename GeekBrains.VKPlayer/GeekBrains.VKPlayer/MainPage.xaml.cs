@@ -1,4 +1,6 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using System.Collections.Generic;
+using VK.WindowsPhone.SDK;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу http://go.microsoft.com/fwlink/?LinkId=391641
@@ -10,11 +12,15 @@ namespace GeekBrains.VKPlayer
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private List<string> _scopeList = new List<string>() { VKScope.AUDIO };
+
         public MainPage()
         {
             this.InitializeComponent();
-
             this.NavigationCacheMode = NavigationCacheMode.Required;
+
+            VKSDK.Initialize("5116069");
+            VKSDK.Authorize(_scopeList, false, false);
         }
     }
 }
