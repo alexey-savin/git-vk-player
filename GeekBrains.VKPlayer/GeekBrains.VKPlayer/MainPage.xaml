@@ -9,6 +9,52 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="409*"/>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="142*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="Resources/background-2.png" Stretch="UniformToFill"/>
+        </Grid.Background>
 
+        <ListBox 
+            x:Name="trackView" 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch" 
+            Grid.Row="1" 
+            Grid.ColumnSpan="3"
+            Background="Transparent"
+            Foreground="White" 
+            SelectionMode="Extended" 
+            Margin="5,0"/>
+
+        <MediaElement 
+            x:Name="player" 
+            Height="100" 
+            Width="100"/>
+
+        <TextBox 
+            x:Name="trackRequest" 
+            HorizontalAlignment="Stretch"
+            Margin="5,5,5,0" 
+            Grid.Row="0"
+            Grid.ColumnSpan="3" 
+            TextWrapping="Wrap" 
+            Text="" 
+            VerticalAlignment="Top" Height="39"/>
+        
+        <ProgressBar 
+            x:Name="playerProgress" 
+            Grid.Row="2"
+            Grid.ColumnSpan="3"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"/>
     </Grid>
 </Page>
