@@ -71,6 +71,7 @@
             Grid.ColumnSpan="3"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch" 
-            />
+            Maximum="{Binding ElementName=player, Path=NaturalDuration.TimeSpan.Seconds}"
+            Value="{Binding ElementName=player, Path=Position.TotalSeconds, Mode=TwoWay}"/>
     </Grid>
 </Page>
