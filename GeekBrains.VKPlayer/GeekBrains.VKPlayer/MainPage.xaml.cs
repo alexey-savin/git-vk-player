@@ -5,6 +5,7 @@ using VK.WindowsPhone.SDK.API;
 using VK.WindowsPhone.SDK.API.Model;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу http://go.microsoft.com/fwlink/?LinkId=391641
@@ -17,6 +18,7 @@ namespace GeekBrains.VKPlayer
     public sealed partial class MainPage : Page
     {
         private List<string> _scopeList = new List<string>() { VKScope.AUDIO };
+        private bool anotherTrack = false;
 
         public MainPage()
         {
@@ -32,13 +34,6 @@ namespace GeekBrains.VKPlayer
             return vkTrackUrl.Substring(0, vkTrackUrl.IndexOf('?'));
         }
 
-        private void TextBlock_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            string tag = (sender as TextBlock).Tag.ToString();
-            player.Source = new Uri(GetTrackUrl(tag));
-            player.Play();
-        }
-
         private void trackRequest_TextChanged(object sender, TextChangedEventArgs e)
         {
             var requestPar = new VKRequestParameters("audio.search", "q", trackRequest.Text);
@@ -48,6 +43,37 @@ namespace GeekBrains.VKPlayer
             };
 
             VKRequest.Dispatch<VKList<VKAudio>>(requestPar, callback);
+        }
+
+        private void trackView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            anotherTrack = true;            
+        }
+
+        private void TextBlock_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            VKAudio track = trackView.SelectedItem as VKAudio;
+            if (track != null && !string.IsNullOrEmpty(track.url))
+            {
+                if (anotherTrack)
+                {
+                    player.Source = new Uri(GetTrackUrl(track.url));
+                    player.Play();
+                }
+                else
+                {
+                    if (player.CurrentState == MediaElementState.Playing)
+                    {
+                        player.Pause();
+                    }
+                    else
+                    {
+                        player.Play();
+                    }
+                }
+            }
+
+            anotherTrack = false;
         }
     }
 }
