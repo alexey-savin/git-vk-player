@@ -10,9 +10,10 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="409*"/>
-            <RowDefinition Height="16*"/>
+            <RowDefinition Height="52*"/>
+            <RowDefinition Height="424*"/>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="142*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -33,11 +34,12 @@
             Background="Transparent"
             Foreground="White" 
             SelectionMode="Extended" 
-            Margin="5,0">
+            Margin="5,0.333,5,16.5"
+            SelectionChanged="trackView_SelectionChanged"
+            FontSize="13.333">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Tag="{Binding url}"
-                               Tapped="TextBlock_Tapped">
+                    <TextBlock Tapped="TextBlock_Tapped">
                         <Run Text="{Binding artist}"/>
                         <Run Text=" - "/>
                         <Run Text="{Binding title}"/>
@@ -49,7 +51,7 @@
         <MediaElement 
             x:Name="player" 
             Height="100" 
-            Width="100"/>
+            Width="100" Margin="17,0,16.333,375.833" Grid.RowSpan="2"/>
 
         <TextBox 
             x:Name="trackRequest" 
@@ -62,12 +64,12 @@
             VerticalAlignment="Top" 
             Height="39"
             TextChanged="trackRequest_TextChanged"/>
-        
+
         <ProgressBar 
             x:Name="playerProgress" 
             Grid.Row="2"
             Grid.ColumnSpan="3"
             HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"/>
+            VerticalAlignment="Stretch" Margin="0,0.167,0,4.802" Grid.RowSpan="2"/>
     </Grid>
 </Page>
