@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using VK.WindowsPhone.SDK;
 using VK.WindowsPhone.SDK.API;
 using VK.WindowsPhone.SDK.API.Model;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
@@ -51,6 +52,26 @@ namespace GeekBrains.VKPlayer
         }
 
         private void TextBlock_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            PlaySelectedTrack();
+        }
+
+        private void player_MediaOpened(object sender, RoutedEventArgs e)
+        {
+            playerProgress.Maximum = player.NaturalDuration.TimeSpan.TotalSeconds;
+        }
+
+        private void player_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            if (trackView.SelectedIndex < trackView.Items.Count - 1)
+            {
+                trackView.SelectedIndex++;
+
+                PlaySelectedTrack();
+            }
+        }
+
+        private void PlaySelectedTrack()
         {
             VKAudio track = trackView.SelectedItem as VKAudio;
             if (track != null && !string.IsNullOrEmpty(track.url))

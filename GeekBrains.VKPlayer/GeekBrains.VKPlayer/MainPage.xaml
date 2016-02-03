@@ -12,8 +12,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="56*"/>
             <RowDefinition Height="563*"/>
-            <RowDefinition Height="16*"/>
-            <RowDefinition Height="49*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -34,7 +34,8 @@
             Foreground="White" 
             SelectionMode="Extended" 
             SelectionChanged="trackView_SelectionChanged"
-            FontSize="13.333">
+            FontSize="13.333" 
+            Margin="0,0,0,5">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Tapped="TextBlock_Tapped">
@@ -51,7 +52,9 @@
             Grid.Row="1"
             Grid.Column="1"
             Height="50"
-            Width="50"/>
+            Width="50"
+            MediaOpened="player_MediaOpened"
+            MediaEnded="player_MediaEnded"/>
 
         <TextBox 
             x:Name="trackRequest" 
@@ -71,6 +74,10 @@
             Grid.ColumnSpan="3"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch" 
-            />
+            Value="{Binding ElementName=player, Path=Position.TotalSeconds, Mode=OneWay}" 
+            IsRightTapEnabled="False" 
+            IsDoubleTapEnabled="False" 
+            Foreground="#FFB7F80B">
+        </ProgressBar>
     </Grid>
 </Page>
